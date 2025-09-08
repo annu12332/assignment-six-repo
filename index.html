@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Earth</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
-<body class>
+<body class=" h-full w-full bg-[#F0FDF4]">
 
     <nav class="flex justify-between bg-[#15803D] px-[135px] py-[24px] text-white text-center items-center">
         <div class="flex ">
@@ -40,7 +41,7 @@
             <h1 class="text-4xl font-bold text-[#1F2937] whitespace-nowrap">Plant a Tree, Grow a Future</h1>
             <p class="mt-3 text-sm text-[#1F2937]">Join our mission to plant 1 million trees and make the Earth greener for future
                generations.</p>
-               <button class="mt-[24px] text-sm text-center bg-[#FACC15] text-[#15803D] px-[20px] py-[12px] rounded-full font-semibold">Get Involved</button>
+               <button  class="mt-[24px] text-sm text-center bg-[#FACC15] text-[#15803D] px-[20px] py-[12px] rounded-full font-semibold">Get Involved</button>
         </div>
 
         <div>
@@ -49,6 +50,34 @@
 
     </section>
 
-    
+    <section class="">
+        <h1 class="text-center text-3xl font-semibold mt-[100px] text-[#1F2937]">Choose Your Trees</h1>
+        <div class="gap-[30px] bg-[#F0FDF4] flex mt-[40px] mx-auto">
+        <div class="categories">
+            <h2>Categories</h2>
+
+        </div>
+
+        <div id="plant-container" class="grid grid-cols-3 gap-[30px] h-full ">
+
+        </div>
+
+        <div class="Cart">
+            <h2 class="whitespace-nowrap">Your Cart</h2>
+
+        </div>
+        </div>
+    </section>
+
+    <script>
+    window.onload = function() {
+    allTrees();
+    };
+   </script>
+
+
+    <script src="script.js"></script>
+    <script src="alltree.js"></script>
 </body>
 </html>
+
