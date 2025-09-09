@@ -1,13 +1,26 @@
+
+const spinner = document.getElementById("spinner");
 const allTrees = () => {
-    const url = "https://openapi.programming-hero.com/api/plants";
-    fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-        displayplants(data.plants);
-        console.log(data);
+ 
+
+  spinner.classList.remove("hidden");  
+
+  fetch("https://openapi.programming-hero.com/api/plants")
+    .then(res => res.json())
+    .then(data => {
+      displayplants(data.plants);
     })
+    .catch(err => console.error(err))
+    .finally(() => spinner.classList.add("hidden"));  
+
+
+
+
+
+   
 
 };
+
 
 const displayplants = (plants) => {
     const plantContainer = document.getElementById("plant-container");
@@ -21,7 +34,15 @@ const displayplants = (plants) => {
                 <img class="w-full h-[186px] rounded-lg shadow-md" src="${plant.image}" />
             </figure>
             <div class="card-body flex-1 ">
-                <h2 class="text-xl font-semibold mt-2">${plant.name}</h2>
+                <h2 class="text-xl font-semibold mt-2 cursor-pointer text-green-700 hover:underline tree-name" 
+                     data-name="${plant.name}" 
+                     data-image="${plant.image}" 
+                     data-description="${plant.description}" 
+                     data-category="${plant.category}" 
+                     data-price="${plant.price}">
+                     ${plant.name}
+                 </h2>
+
                 <p class="text-sm text-[#1F2937] ">${plant.description}</p>
                 <div class="flex justify-between items-center mt-[8px]">
                     <div class="text-[#15803D] bg-[#DCFCE7] px-[12px] py-[4px] rounded-full ">${plant.category}</div>
@@ -37,6 +58,23 @@ const displayplants = (plants) => {
         </div>`;
         plantContainer.appendChild(div);
     });
+
+     const treeNames = document.querySelectorAll(".tree-name");
+    treeNames.forEach(name => {
+      name.addEventListener("click", (e) => {
+            const plant = {
+          name: e.target.getAttribute("data-name"),
+          image: e.target.getAttribute("data-image"),
+          description: e.target.getAttribute("data-description"),
+          category: e.target.getAttribute("data-category"),
+          price: e.target.getAttribute("data-price"),
+        };
+        openModal(plant);
+      });
+    });
+
+
+
 
     // button event//
     const addToCartBtn = document.querySelectorAll(".add-to-cart");
@@ -166,11 +204,33 @@ categoriesContainer.addEventListener("click", (e) =>{
 
 
 
+window.addEventListener('DOMContentLoaded', () => {
+  allTrees();
+  loadCategories();
+});
+
+function openModal(plant) {
+  document.getElementById("modalTitle").textContent = plant.name;
+  document.getElementById("modalImage").src = plant.image;
+  document.getElementById("modalDescription").textContent = plant.description;
+  document.getElementById("modalCategory").textContent = plant.category;
+  document.getElementById("modalPrice").innerHTML = `<i class="fa-solid fa-bangladeshi-taka-sign"></i> ${plant.price}`;
+  document.getElementById("treeModal").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("treeModal").classList.add("hidden");
+}
+
+document.getElementById("closeModal").addEventListener("click", closeModal);
 
 
 
 
-loadCategories();
-allTrees();
+
+
+
+
+
 
 
