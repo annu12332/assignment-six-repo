@@ -42,3 +42,33 @@ const displayplants = (plants) => {
    })
 };
 
+
+const loadCategories = () => {
+    fetch("https://openapi.programming-hero.com/api/categories")
+        .then(res => res.json())
+        .then(json => displayCategory(json.categories));
+        console.log(json);
+        
+};
+
+
+
+const displayCategory=(categories) => {
+  //console.log(categories);
+
+  const categoriesContainer = document.getElementById("categories-container");
+  categoriesContainer.innerHTML= "";
+
+  categories.forEach(category=>{
+    const btnDiv = document.createElement("div");
+    btnDiv.innerHTML= `
+    <div class="hover:bg-[#15803D] cursor-pointer hover:text-white px-[19px]" >${category.category_name}</div>`;
+
+    categoriesContainer.appendChild(btnDiv);
+  });
+
+}
+
+loadCategories();
+
+
